@@ -45,7 +45,9 @@
 		                money.classList.toggle("animate__bounce");
 		          }, 2001);
 			}else{
-			  money.innerText = "$" + (parseInt(money.innerText.toString().replace('$', '')) - a).toString();
+			  var NewAmount = (parseInt(money.innerText.toString().replace('$', '')) - a);
+			  CurrentMoney = NewAmount;	
+			  money.innerText = "$"+CurrentMoney;
 			}
 		}
 	</script>
