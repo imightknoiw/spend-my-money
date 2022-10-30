@@ -22,7 +22,7 @@
 		const CurrentMoney = 6969
 		var money = document.getElementById('money');
 		window.onload = function() {
-			emoney.innerText = "$"+CurrentMoney;
+			money.innerText = "$"+CurrentMoney;
 		}
 		window.onbeforeunload = function() {
 			return "NO";
@@ -35,7 +35,7 @@
 				money.className = "";
 		          }, 2001);
 			}
-			emoney.innerText = "$" + (parseInt(emoney.innerText.toString().replace('$', '')) - a).toString();
+			money.innerText = "$" + (parseInt(money.innerText.toString().replace('$', '')) - a).toString();
 		}
 	</script>
 </body>
