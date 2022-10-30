@@ -3,6 +3,13 @@
 
 <head>
 	<title>Spend my money!</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	<style>
+		.NotEnough {
+		  animation: animate__shakeX; 
+                  animation-duration: 2s; 
+		}	
+	</style>	
 </head>
 
 <body style="margin:0;font-family:Arial;text-align:center;">
@@ -12,15 +19,22 @@
 		<button onclick="sub(this.value)" value="500">Buy</button>
 	</div>
 	<script>
-		var emoney = document.getElementById('money');
+		const CurrentMoney = 6969
+		var money = document.getElementById('money');
 		window.onload = function() {
-			emoney.innerText = "$5";
+			emoney.innerText = "$"+CurrentMoney;
 		}
 		window.onbeforeunload = function() {
 			return "NO";
 		}
 		
 		function sub(a) {
+			if (a > CurrentMoney){
+			  money.className = "NotEnough";	
+			  setTimeout(function(){
+				money.className = "";
+		          }, 2001);
+			}
 			emoney.innerText = "$" + (parseInt(emoney.innerText.toString().replace('$', '')) - a).toString();
 		}
 	</script>
