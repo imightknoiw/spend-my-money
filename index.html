@@ -17,6 +17,11 @@
                   -ms-user-select: none; 
                   user-select: none; 
 		}
+		button {
+		  cursor: pointer;
+		  outline: none;
+	          border-radius: 10%;		
+		}
 	</style>	
 </head>
 
@@ -26,11 +31,31 @@
 		<label>Item 1</label><br />
 		<button onclick="sub(this.value)" value="500">Buy</button>
 	</div>
+	<footer style="position: fixed;bottom:0;">Last updated: <span id="lastUpdated"></span></footer>
 	<script>
 		const CurrentMoney = 6969
 		var money = document.getElementById('money');
+		var lastUpdated = document.getElementById('lastUpdated');
+		const dateString = '2020-05-14T04:00:00Z''
+		const formatDate = (dateString) => {
+  			const options = { year: "numeric", 
+					 month: "long", 
+					 day: "numeric" 
+					}
+  			return new Date(dateString).toLocaleDateString(undefined, options)
+		}
 		window.onload = function() {
 			money.innerText = "$"+CurrentMoney;
+			var xhttp = new XMLHttpRequest();
+			xhttp.responseType = 'json';
+  			xhttp.onreadystatechange = function() {
+    				if (this.readyState == 4 && ) {
+      					lastUpdated.innerText = this.response.committer;
+    				}
+  			};
+  			xhttp.open("GET", "https://api.github.com/repos/imightknoiw/mysite/branches/main", true);
+  			xhttp.send();
+			lastUpdated.innerText = 
 		}
 		window.onbeforeunload = function() {
 			return "NO";
