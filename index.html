@@ -8,12 +8,20 @@
 	<style>
 		.red {
 		  color: red;
-		}	
+		}
+		body {
+		  -webkit-touch-callout: none; 
+    		  -webkit-user-select: none; 
+                  -khtml-user-select: none; 
+                  -moz-user-select: none; 
+                  -ms-user-select: none; 
+                  user-select: none; 
+		}
 	</style>	
 </head>
 
 <body style="margin:0;font-family:Arial;text-align:center;">
-	<h1>Spend my money!<span id="money" style="position: fixed;right: 0;"></span></h1>
+	<h1>Spend my money!<span class="animate__animated" id="money" style="position: fixed;right: 0;"></span></h1>
 	<div id="item">
 		<label>Item 1</label><br />
 		<button onclick="sub(this.value)" value="500">Buy</button>
@@ -30,9 +38,11 @@
 		
 		function sub(a) {
 			if (a > CurrentMoney){
-			  money.className = "animate__animated animate__bounce red";	
+  			  money.classList.toggle("red");
+		          money.classList.toggle("animate__bounce");		
 			  setTimeout(function(){
-				money.className = "";
+				money.classList.toggle("red");
+		                money.classList.toggle("animate__bounce");
 		          }, 2001);
 			}else{
 			  money.innerText = "$" + (parseInt(money.innerText.toString().replace('$', '')) - a).toString();
