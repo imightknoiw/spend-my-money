@@ -6,9 +6,8 @@
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 	<style>
-		.NotEnough {
-		  animation: shakeX; 
-                  animation-duration: 2s; 
+		.red {
+		  color: red;
 		}	
 	</style>	
 </head>
@@ -31,7 +30,7 @@
 		
 		function sub(a) {
 			if (a > CurrentMoney){
-			  money.className = "NotEnough";	
+			  money.className = "animate__animated animate__bounce red";	
 			  setTimeout(function(){
 				money.className = "";
 		          }, 2001);
