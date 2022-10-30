@@ -34,8 +34,9 @@
 			  setTimeout(function(){
 				money.className = "";
 		          }, 2001);
+			}else{
+			  money.innerText = "$" + (parseInt(money.innerText.toString().replace('$', '')) - a).toString();
 			}
-			money.innerText = "$" + (parseInt(money.innerText.toString().replace('$', '')) - a).toString();
 		}
 	</script>
 </body>
