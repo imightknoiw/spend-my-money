@@ -5,7 +5,7 @@
 	<title>Spend my money!</title>
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<style>
 		.red {
 		  color: red;
@@ -39,9 +39,17 @@
 
 <body style="margin:0;font-family:Arial;text-align:center;">
 	<h1>💰 Spend my money!<span id="money" style="position: fixed;right: 0;"></span></h1>
-	<div id="item">
-		<label>Item 1</label><br />
+	<div class="item">
+		<label>Loading</label><br />
+		<button onclick="sub(this.value)" value="100">Loading</button>
+	</div>
+	<div class="item">
+		<label>Loading</label><br />
 		<button onclick="sub(this.value)" value="500">Loading</button>
+	</div>
+	<div class="item">
+		<label>Loading</label><br />
+		<button onclick="sub(this.value)" value="1000">Loading</button>
 	</div>
 	<footer style="position: fixed;bottom:0;">Last updated: <span id="lastUpdated">Loading...</span></footer>
 	<script>
@@ -60,6 +68,11 @@
             for (var i=0;i<buttons.length;i++){
               buttons[i].innerText = "buy for $"+buttons[i].value;
             }
+            var items = document.getElementsByClassName('item');
+	    for (var i=0;i<items.length;i++){
+	      var labels = items[i].children[0]; // shitty browser compatability but idgaf
+	      labels.innerText = "Item "+(i+1).toString();    
+	    }
 			money.innerText = "$"+CurrentMoney;
                          $.get('https://api.github.com/repos/imightknoiw/mysite/branches/main', function(responseText) {
     			lastUpdated.innerText = formatDate(responseText.commit.commit.author.date);
