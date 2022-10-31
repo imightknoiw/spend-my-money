@@ -4,7 +4,7 @@
 <head>
 	<title>Spend my money!</title>
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<style>
 		.red {
 		  color: red;
@@ -34,7 +34,7 @@
 </head>
 
 <body style="margin:0;font-family:Arial;text-align:center;">
-	<h1>💰 Spend my money!<span class="animate__animated" id="money" style="position: fixed;right: 0;"></span></h1>
+	<h1>💰 Spend my money!<span id="money" style="position: fixed;right: 0;"></span></h1>
 	<div id="item">
 		<label>Item 1</label><br />
 		<button onclick="sub(this.value)" value="500">Buy</button>
@@ -70,11 +70,9 @@
 		
 		function sub(a) {
 			if (a > CurrentMoney){
-  			  money.classList.toggle("red");
-		          money.classList.toggle("animate__bounce");		
+  			 money.classList.add('animate__animated', 'animate__shakeX', 'red');		
 			  setTimeout(function(){
-				money.classList.toggle("red");
-		                money.classList.toggle("animate__bounce");
+				money.classList.remove('animate__animated', 'animate__shakeX', 'red');
 		          }, 2001); // best year i know 💀        
 			}else{
 			  var NewAmount = (parseInt(money.innerText.toString().replace('$', '')) - a);
