@@ -60,8 +60,7 @@
 			xhttp.responseType = 'json';
   			xhttp.onreadystatechange = function() {
     				if (this.readyState == 4 && this.status == 200) {
-				        var data = JSON.parse(data);
-      					lastUpdated.innerText = formateDate(data.response.committer.date);
+      					lastUpdated.innerText = formateDate(JSON.parse(this.responseText).commit.commit.author.date);
     				}
   			};
   			xhttp.open("GET", "https://api.github.com/repos/imightknoiw/mysite/branches/main", true);
