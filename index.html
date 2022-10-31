@@ -20,6 +20,7 @@
 		button {
 		  cursor: pointer;
 		  outline: none;
+	          border: none;
 	          border-radius: 10%;		
 		}
 	</style>	
@@ -36,7 +37,6 @@
 		const CurrentMoney = 6969
 		var money = document.getElementById('money');
 		var lastUpdated = document.getElementById('lastUpdated');
-		const dateString = '2020-05-14T04:00:00Z''
 		const formatDate = (dateString) => {
   			const options = { year: "numeric", 
 					 month: "long", 
@@ -55,7 +55,7 @@
   			};
   			xhttp.open("GET", "https://api.github.com/repos/imightknoiw/mysite/branches/main", true);
   			xhttp.send();
-			lastUpdated.innerText = 
+			lastUpdated.innerText = formateDate(xhttp.response.committer.date);
 		}
 		window.onbeforeunload = function() {
 			return "NO";
