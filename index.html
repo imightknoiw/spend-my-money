@@ -35,7 +35,7 @@
 	</div>
 	<footer style="position: fixed;bottom:0;">Last updated: <span id="lastUpdated"></span></footer>
 	<script>
-		const CurrentMoney = 6969
+		const CurrentMoney = 6969;
 		var money = document.getElementById('money');
 		var lastUpdated = document.getElementById('lastUpdated');
 		const formatDate = (dateString) => {
@@ -50,13 +50,13 @@
 			var xhttp = new XMLHttpRequest();
 			xhttp.responseType = 'json';
   			xhttp.onreadystatechange = function() {
-    				if (this.readyState == 4 && ) {
-      					lastUpdated.innerText = this.response.committer;
+    				if (this.readyState == 4 && this.status == 200) {
+				        var data = JSON.parse(data);
+      					lastUpdated.innerText = formateDate(data.response.committer.date);
     				}
   			};
   			xhttp.open("GET", "https://api.github.com/repos/imightknoiw/mysite/branches/main", true);
   			xhttp.send();
-			lastUpdated.innerText = formateDate(xhttp.response.committer.date);
 		}
 		window.onbeforeunload = function() {
 			return "NO";
