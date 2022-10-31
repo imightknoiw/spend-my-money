@@ -41,11 +41,11 @@
 	<h1>💰 Spend my money!<span id="money" style="position: fixed;right: 0;"></span></h1>
 	<div id="item">
 		<label>Item 1</label><br />
-		<button onclick="sub(this.value)" value="500">Buy</button>
+		<button onclick="sub(this.value)" value="500">Loading</button>
 	</div>
-	<footer style="position: fixed;bottom:0;">Last updated: <span id="lastUpdated">Not sent yet</span></footer>
+	<footer style="position: fixed;bottom:0;">Last updated: <span id="lastUpdated">Loading...</span></footer>
 	<script>
-		const CurrentMoney = 6969;
+		var CurrentMoney = 6969;
 		var money = document.getElementById('money');
 		var lastUpdated = document.getElementById('lastUpdated');
 		const formatDate = (dateString) => {
@@ -56,6 +56,10 @@
   			return new Date(dateString).toLocaleDateString(undefined, options)
 		}
 		window.onload = function() {
+            var buttons = document.getElementsByTagName('button');
+            for (var i=0;i<buttons.length;i++){
+              buttons[i].innerText = "buy for $"+buttons[i].value;
+            }
 			money.innerText = "$"+CurrentMoney;
                          $.get('https://api.github.com/repos/imightknoiw/mysite/branches/main', function(responseText) {
     			lastUpdated.innerText = formatDate(responseText.commit.commit.author.date);
@@ -70,7 +74,7 @@
   			 money.classList.add('animate__animated', 'animate__shakeX', 'red');		
 			  setTimeout(function(){
 				money.classList.remove('animate__animated', 'animate__shakeX', 'red');
-		          }, 2001); // best year i know 💀        
+		          }, 2001); // best year i know 💀     
 			}else{
 			  var NewAmount = (parseInt(money.innerText.toString().replace('$', '')) - a);
 			  CurrentMoney = NewAmount;	
