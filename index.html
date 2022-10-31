@@ -65,7 +65,9 @@
 	</div>
 	<footer style="position: fixed;bottom:0;">Last updated: <span id="lastUpdated">Loading...</span></footer>
 	<script>
-		var CurrentMoney = 6969;
+		
+		const StarterMoney = 6969;
+		var CurrentMoney = StarterMoney;
 		var money = document.getElementById('money');
 		var lastUpdated = document.getElementById('lastUpdated');
 		const formatDate = (dateString) => {
@@ -91,7 +93,9 @@
 			});
 		}
 		window.onbeforeunload = function() {
-			return "NO";
+			if (StarterMoney > CurrentMoney){
+			  return "NO";
+			}
 		}
 		
 		function sub(a) {
