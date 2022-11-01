@@ -129,7 +129,7 @@ function formatDate(dateString){
 		month: "long",
 		day: "numeric"
 	};
-	const date = new Date(dateString),
+	var date = new Date(dateString),
 	   formattedDate = date.toLocaleDateString(undefined, options),
            ts = timeSince(date);       
         return `${formattedDate} (${ts} ago)`;
@@ -142,7 +142,7 @@ window.onload = function() {
 		var label = items[i].children[0],
 		    button = items[i].children[2],
 		    input = items[i].children[3],
-		    itemName = 'item' + (i + 1).toString());
+		    itemName = 'item' + (i + 1).toString();
 		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
