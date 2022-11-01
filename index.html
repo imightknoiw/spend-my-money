@@ -166,8 +166,8 @@ function sub(e) {
 		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
 		var subFloat = document.createElement('span');
 		subFloat.style.zIndex = "9999";
-		subFloat.style.top = "calc(100vh - 20px)";
-		subFloat.style.position = "absolute";
+		subFloat.style.right = "0";
+		subFloat.style.position = "fixed";
 		subFloat.innerText = "-$"+a.toString();
 		subFloat.classList.add('animate__animated', 'animate__fadeOutUp', 'red');
 		money.appendChild(subFloat);
