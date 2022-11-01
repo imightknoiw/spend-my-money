@@ -170,7 +170,7 @@ function sub(e) {
 		var subFloat = document.createElement('span');
 		subFloat.innerText = "-$"+a.toString();
 		subFloat.classList.add('animate__animated', 'animate__fadeOutUp', 'red');
-		money.insertBefore(subFloat, money);
+		money.insertBefore(subFloat, null);
 		setTimeout(function(){
 		  subFloat.remove();
 		}, 2000);
