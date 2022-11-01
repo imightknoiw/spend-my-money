@@ -121,11 +121,11 @@ const formatDate = (dateString) => {
 		month: "long",
 		day: "numeric"
 	};
-	var date = new Date(dateString);
-	var formattedDate = date.toLocaleDateString(undefined, options);
-  var ts = timeSince(date);   
+	var date = new Date(dateString),
+	   formattedDate = date.toLocaleDateString(undefined, options),
+           ts = timeSince(date);   
     
-return {fd: formattedDate, ts: ts};
+return `${formattedDate} (${ts} ago)`
 };
 
 window.onload = function() {
@@ -133,7 +133,7 @@ window.onload = function() {
 	for (var i = 0; i < buttons.length; i++) {
 		buttons[i].id = 'item' + (i + 1).toString();
     		purchases["item"+(i + 1).toString()] = 0;
-   		buttons[i].innerText = "buy for $" + buttons[i].value + "("+purchases[buttons[i].id]+"x)";
+   		buttons[i].innerText = "buy for $" + buttons[i].value + " ("+purchases[buttons[i].id]+"x)";
 	}
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
@@ -143,8 +143,7 @@ window.onload = function() {
 	}
 	money.innerText = "$" + CurrentMoney;
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
-		var updateDate = response.commit.commit.author.date;
-    lastUpdated.innerText = formatDate(updateDate).fd+" ("+formatDate(updateDate).ts+" ago)";
+                lastUpdated.innerText = formatDate(response.commit.commit.author.date);
 	});
 };
 window.onbeforeunload = function() {
@@ -163,7 +162,7 @@ function sub(e) {
 		var NewAmount = (CurrentMoney - e.value);
 		CurrentMoney = NewAmount;
 		money.innerText = "$" + CurrentMoney;
-		e.innerText = "buy for $" + e.value + "("+purchases[e.id]+"x)";
+		e.innerText = "buy for $" + e.value + " ("+purchases[e.id]+"x)";
 	}
 }
 	</script>
