@@ -138,16 +138,18 @@ window.onload = function() {
 	for (var i = 0; i < items.length; i++) {
 		var label = items[i].children[0],
 		    button = items[i].children[1],
-		    input = items[i].children[2];
-		label.innerText = 'Item ' + (i + 1).toString();
-		label.addAttribute('for', 'item' + (i + 1).toString());
+		    input = items[i].children[2],
+		    itemName = 'item' + (i + 1).toString());
 		
-		button.id = 'item' + (i + 1).toString();
-    		purchases['item'+(i + 1).toString()] = 0;
-   		button.innerText = "buy for $" + button.value + " ("+purchases['item' + (i + 1).toString()]+"x)";
+		label.innerText = 'Item ' + (i + 1).toString();
+		label.addAttribute('for', itemName);
+		
+		button.id = itemName;
+    		purchases[itemName] = 0;
+   		button.innerText = "buy for $" + button.value + " ("+purchases[itemName]+"x)";
 		
 		input.placeholder = "Amount to restore";
-		input.max = Math.floor(purchases['item'+(i + 1).toString()] / 2);
+		input.max = Math.floor(purchases[itemName]) / 2;
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
                 lastUpdated.innerText = formatDate(response.commit.commit.author.date);
