@@ -144,7 +144,7 @@ window.onload = function() {
 		
 		button.id = 'item' + (i + 1).toString();
     		purchases['item'+(i + 1).toString()] = 0;
-   		button.innerText = "buy for $" + button.value + " ("+purchases[button.id]+"x)";
+   		button.innerText = "buy for $" + button.value + " ("+purchases['item' + (i + 1).toString()]+"x)";
 		
 		input.placeholder = "Amount to restore";
 		input.max = Math.floor(purchases['item'+(i + 1).toString()] / 2);
