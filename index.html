@@ -49,10 +49,14 @@
 		  background-color: rgba(0, 0, 0, 0.45);
 		  transition: background-color 1s;
 		}
+		
 		footer {
 		  margin-top: auto;
 		}
+		
 		.item {
+		  height: auto;
+		  width: auto;	
 		  border: 1px solid black;
 		  border-radius: 10%;	
 		  padding-bottom: 10px;
@@ -123,8 +127,8 @@ window.onload = function() {
 	var buttons = document.getElementsByTagName('button');
 	for (var i = 0; i < buttons.length; i++) {
 		buttons[i].id = 'item' + (i + 1).toString();
-    purchases["item"+(i + 1).toString()] = 0;
-    buttons[i].innerText = "buy for $" + buttons[i].value + "("+purchases[button.id]+"x)";
+    		purchases["item"+(i + 1).toString()] = 0;
+   		buttons[i].innerText = "buy for $" + buttons[i].value + "("+purchases[buttons[i].id]+"x)";
 	}
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
