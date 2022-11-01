@@ -95,6 +95,7 @@
 const StarterMoney = 1669;
 var CurrentMoney = StarterMoney;
 var money = document.getElementById('money');
+money.innerText = "$" + CurrentMoney;
 var lastUpdated = document.getElementById('lastUpdated');
 let purchases = {};
 
@@ -136,7 +137,7 @@ function formatDate(dateString){
        }
 
 window.onload = function() {
-	money.innerText = "$" + CurrentMoney;
+	
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
 		var label = items[i].children[0],
