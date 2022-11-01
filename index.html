@@ -134,18 +134,18 @@ function formatDate(dateString){
 
 window.onload = function() {
 	money.innerText = "$" + CurrentMoney;
-	var buttons = document.getElementsByTagName('button');
-	for (var i = 0; i < buttons.length; i++) {
-		buttons[i].id = 'item' + (i + 1).toString();
-    		purchases['item'+(i + 1).toString()] = 0;
-   		buttons[i].innerText = "buy for $" + buttons[i].value + " ("+purchases[buttons[i].id]+"x)";
-	}
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
-		var label = items[i].children[0];
-		var input = items[i].children[2];
+		var label = items[i].children[0],
+		    button = items[i].children[1],
+		    input = items[i].children[2];
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', 'item' + (i + 1).toString());
+		
+		button.id = 'item' + (i + 1).toString();
+    		purchases['item'+(i + 1).toString()] = 0;
+   		button.innerText = "buy for $" + button.value + " ("+purchases[button.id]+"x)";
+		
 		input.placeholder = "Amount to restore";
 		input.max = Math.floor(purchases['item'+(i + 1).toString()] / 2);
 	}
