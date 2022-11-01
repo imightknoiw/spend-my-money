@@ -103,8 +103,9 @@
 					 month: "long", 
 					 day: "numeric" 
 					}
-			var formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
-  			return `${formattedDate} (${timeSince(formattedDate)})`;
+			var date = new Date(dateString),
+			    formattedDate = date.toLocaleDateString(undefined, options);
+  			return `${formattedDate} (${timeSince(date)})`;
 		}
 		
 	    window.onload = function() {
