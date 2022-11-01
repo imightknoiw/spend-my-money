@@ -71,85 +71,86 @@
 	</div>
 	<footer style="bottom:0;position: relative;">Last updated: <span id="lastUpdated">Loading</span></footer>
 	<script>
-		
-		const StarterMoney = 1669;
-		var CurrentMoney = StarterMoney;
-		var money = document.getElementById('money');
-		var lastUpdated = document.getElementById('lastUpdated');
-		function timeSince(date) {
+const StarterMoney = 1669;
+var CurrentMoney = StarterMoney;
+var money = document.getElementById('money');
+var lastUpdated = document.getElementById('lastUpdated');
+let purchases = {};
 
-  			var seconds = Math.floor((new Date() - date) / 1000);
+function timeSince(date) {
+	
+	var seconds = Math.floor((new Date() - date) / 1000);
+	
+	var interval = seconds / 31536000;
+	
+	if (interval > 1) {
+		return Math.floor(interval) + " years";
+	}
+	interval = seconds / 2592000;
+	if (interval > 1) {
+		return Math.floor(interval) + " months";
+	}
+	interval = seconds / 86400;
+	if (interval > 1) {
+		return Math.floor(interval) + " days";
+	}
+	interval = seconds / 3600;
+	if (interval > 1) {
+		return Math.floor(interval) + " hours";
+	}
+	interval = seconds / 60;
+	if (interval > 1) {
+		return Math.floor(interval) + " minutes";
+	}
+	return Math.floor(seconds) + " seconds";
+}
+	const options = {
+		year: "numeric",
+		month: "long",
+		day: "numeric"
+	};
+	var date = new Date(dateString),
+		formattedDate = date.toLocaleDateString(undefined, options);
+	return `${formattedDate} (${timeSince(date)} ago)`;
+};
 
-  			var interval = seconds / 31536000;
+window.onload = function() {
+	var buttons = document.getElementsByTagName('button');
+	for (var i = 0; i < buttons.length; i++) {
+		buttons[i].id = 'item' + (i + 1).toString();
+    purchases["item"+(i + 1).toString()] = 0;
+    buttons[i].innerText = "buy for $" + buttons[i].value + "("+purchases[button.id]+"x)";
+	}
+	var items = document.getElementsByClassName('item');
+	for (var i = 0; i < items.length; i++) {
+		var labels = items[i].children[0];
+		labels.innerText = 'Item ' + (i + 1).toString();
+		labels.addAttribute('for', 'item' + (i + 1).toString());
+	}
+	money.innerText = "$" + CurrentMoney;
+	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
+		lastUpdated.innerText = formatDate(response.commit.commit.author.date);
+	});
+};
+window.onbeforeunload = function() {
+	if (StarterMoney > CurrentMoney) {
+		return "NO";
+	}
+};
 
-  			if (interval > 1) {
-    			return Math.floor(interval) + " years";
-  			}
-  			interval = seconds / 2592000;
-  			if (interval > 1) {
-    			return Math.floor(interval) + " months";
-  			}
-  			interval = seconds / 86400;
-  			if (interval > 1) {
-    			return Math.floor(interval) + " days";
-  			}
-  			interval = seconds / 3600;
-  			if (interval > 1) {
-    			return Math.floor(interval) + " hours";
-  			}
-  			interval = seconds / 60;
-  			if (interval > 1) {
-    			return Math.floor(interval) + " minutes";
-  			}
- 			 return Math.floor(seconds) + " seconds";
-			}
-			var aDay = 24*60*60*1000;
-		const formatDate = (dateString) => {
-  			const options = { year: "numeric", 
-					 month: "long", 
-					 day: "numeric" 
-					}
-			var date = new Date(dateString),
-			    formattedDate = date.toLocaleDateString(undefined, options);
-  			return `${formattedDate} (${timeSince(date)} ago)`;
-		}
-		
-	    window.onload = function() {
-            var buttons = document.getElementsByTagName('button');
-            for (var i=0;i<buttons.length;i++){
-              buttons[i].innerText = "buy for $"+buttons[i].value;
-	      buttons[i].id = 'item'+(i+1).toString();  
-            }
-            var items = document.getElementsByClassName('item');
-	    for (var i=0;i<items.length;i++){
-	      var labels = items[i].children[0]; 
-	      labels.innerText = 'Item '+(i+1).toString();
-	      labels.addAttribute('for', 'item'+(i+1).toString());    
-	    }
-			money.innerText = "$"+CurrentMoney;
-                         $.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
-    				lastUpdated.innerText = formatDate(response.commit.commit.author.date);
-			 });
-		}
-		window.onbeforeunload = function() {
-			if (StarterMoney > CurrentMoney){
-			  return "NO";
-			}
-		}
-		
-		function sub(e) {
-			if (e.value > CurrentMoney){
-  			 money.classList.add('animate__animated', 'animate__shakeX', 'red');		
-			  setTimeout(function(){
-				money.classList.remove('red', 'animate__animated', 'animate__shakeX');
-		          }, 2100);     
-			}else{
-			  var NewAmount = (CurrentMoney - e.value);
-			  CurrentMoney = NewAmount;	
-			  money.innerText = "$"+CurrentMoney;
-			  e.innerText = buttons[i].innerText = "buy for $"+buttons[i].value;	
-			}
-		}
+function sub(e) {
+	if (e.value > CurrentMoney) {
+		money.classList.add('animate__animated', 'animate__shakeX', 'red');
+		setTimeout(function() {
+			money.classList.remove('red', 'animate__animated', 'animate__shakeX');
+		}, 2100);
+	} else {
+		var NewAmount = (CurrentMoney - e.value);
+		CurrentMoney = NewAmount;
+		money.innerText = "$" + CurrentMoney;
+		e.innerText = "buy for $" + e.value + "("+purchases[e.id]+"x)";
+	}
+}
 	</script>
 </body>
 
