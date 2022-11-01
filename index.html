@@ -127,8 +127,8 @@
 	      labels.addAttribute('for', 'item'+(i+1).toString());    
 	    }
 			money.innerText = "$"+CurrentMoney;
-                         $.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(github) {
-    				lastUpdated.innerText = formatDate(github.commit.commit.author.date);
+                         $.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
+    				lastUpdated.innerText = formatDate(response.commit.commit.author.date);
 			 });
 		}
 		window.onbeforeunload = function() {
