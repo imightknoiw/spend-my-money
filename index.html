@@ -168,9 +168,12 @@ function sub(e) {
 		purchases[e.id] = purchases[e.id] + 1;
 		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
 		var subFloat = document.createElement('span');
+		subFloat.style.zIndex = "9999";
+		subFloat.style.top = "calc(100vh - 5px)";
+		subFloat.style.position = "absolute";
 		subFloat.innerText = "-$"+a.toString();
 		subFloat.classList.add('animate__animated', 'animate__fadeOutUp', 'red');
-		money.insertBefore(subFloat, null);
+		money.appendChild(subFloat);
 		setTimeout(function(){
 		  subFloat.remove();
 		}, 2000);
