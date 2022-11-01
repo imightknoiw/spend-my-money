@@ -114,7 +114,7 @@ function timeSince(date) {
 	}
 	return Math.floor(seconds) + " seconds";
 }
-const formatDate = (dateString) => {
+const formatDate => (dateString) => {
 	const options = {
 		year: "numeric",
 		month: "long",
@@ -124,7 +124,7 @@ const formatDate = (dateString) => {
 	   formattedDate = date.toLocaleDateString(undefined, options),
            ts = timeSince(date);       
         return `${formattedDate} (${ts} ago)`;
-};
+       };
 
 window.onload = function() {
 	money.innerText = "$" + CurrentMoney;
