@@ -130,7 +130,7 @@ function formatDate(dateString){
 	   formattedDate = date.toLocaleDateString(undefined, options),
            ts = timeSince(date);       
         return `${formattedDate} (${ts} ago)`;
-       };
+       }
 
 window.onload = function() {
 	money.innerText = "$" + CurrentMoney;
@@ -147,7 +147,7 @@ window.onload = function() {
 		labels.innerText = 'Item ' + (i + 1).toString();
 		labels.addAttribute('for', 'item' + (i + 1).toString());
 		inputs.placeholder = "Amount to restore";
-		inputs.max = purchases['item'+(i + 1).toString()];
+		inputs.max = Math.floor(purchases['item'+(i + 1).toString()] / 2);
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
                 lastUpdated.innerText = formatDate(response.commit.commit.author.date);
@@ -173,7 +173,8 @@ function sub(e) {
 		money.innerText = "$" + NewAmount;
 		purchases[e.id] += 1;
 		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
-		if (purchases[e.id] > 0) e.previousSibling.removeAttribute('readonly'); e.max = purchases[e.id]; else e.previousSibling.addAttribute('readonly', 'readonly'); e.max = purchases[e.id];
+                if (purchases[e.id] > 0){ e.nextSibling.removeAttribute('readonly'); } else { e.nextSibling.addAttribute('readonly', 'readonly'); }
+		e.nextSibling.max = Math.floor(purchases[e.id] / 2);
 		var subFloat = document.createElement('span');
 		subFloat.style.zIndex = "9999";
 		subFloat.style.right = "0";
@@ -188,20 +189,21 @@ function sub(e) {
 }
 document.addEventListener('keyup', function(e){
   if (e.key == "Enter" && document.activeElement.nodeName == "INPUT"){
-    var a = document.activeElement.value;
-	  add({value: a});
+	  add(document.activeElement);
   }
 });	
 		
 function add(e){
-        var a = e.value;
+        var a = e.previousSibling.value;
 	var NewAmount = (CurrentMoney + a);
 	CurrentMoney = NewAmount;
 	money.innerText = "$" + CurrentMoney;
-	purchases[e.id] -= 1;
-	e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
-	if (purchases[e.id] > 0) e.previousSibling.removeAttribute('readonly'); e.max = purchases[e.id]; else e.previousSibling.addAttribute('readonly', 'readonly'); e.max = purchases[e.id];
-	var subFloat = document.createElement('span');
+	purchases[e.previousSibling.id] -= 1;
+	e.previousSibling.innerText = "buy for $" + a + " ("+purchases[e.previousSibling.id]+"x)";
+        if (purchases[e.previousSibling.id] > 0){ e.removeAttribute('readonly'); } else {e.previousSibling.addAttribute('readonly', 'readonly');}
+	e.max = Math.floor(purchases[e.id] / 2);
+	e.value = '';
+        var subFloat = document.createElement('span');
 	subFloat.style.zIndex = "9999";
 	subFloat.style.right = "0";
 	subFloat.style.position = "fixed";
