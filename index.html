@@ -111,7 +111,7 @@ function timeSince(date) {
 	};
 	var date = new Date(dateString),
 		formattedDate = date.toLocaleDateString(undefined, options);
-	return `${formattedDate} (${timeSince(date)} ago)`;
+	return formattedDate+" ("+timeSince(date)+" ago)";
 };
 
 window.onload = function() {
