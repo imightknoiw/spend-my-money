@@ -154,18 +154,26 @@ window.onbeforeunload = function() {
 };
 
 function sub(e) {
-	if (e.value > CurrentMoney) {
+	var a = e.value;
+	if (a > CurrentMoney) {
 		money.classList.add('animate__animated', 'animate__shakeX', 'red');
 		setTimeout(function() {
 			money.classList.remove('red');
 			money.classList.remove('animate__animated', 'animate__shakeX');
 		}, 2100);
 	} else {
-		var NewAmount = (CurrentMoney - e.value);
+		var NewAmount = (CurrentMoney - a);
 		CurrentMoney = NewAmount;
 		money.innerText = "$" + CurrentMoney;
 		purchases[e.id] = purchases[e.id] + 1;
-		e.innerText = "buy for $" + e.value + " ("+purchases[e.id]+"x)";
+		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
+		var subFloat = document.createElement('span');
+		subFloat.innerText = "-$"+a.toString();
+		subFloat.classList.add('animate__animated', 'animate__fadeOutUp', 'red');
+		money.appendChild(subFloat);
+		setTimeout(function(){
+		  subFloat.remove();
+		}, 2000);
 	}
 }
 	</script>
