@@ -92,9 +92,7 @@ let purchases = {};
 function timeSince(date) {
 	
 	var seconds = Math.floor((new Date() - date) / 1000);
-	
 	var interval = seconds / 31536000;
-	
 	if (interval > 1) {
 		return Math.floor(interval) + " years";
 	}
@@ -124,9 +122,8 @@ const formatDate = (dateString) => {
 	};
 	var date = new Date(dateString),
 	   formattedDate = date.toLocaleDateString(undefined, options),
-           ts = timeSince(date);   
-    
-return `${formattedDate} (${ts} ago)`;
+           ts = timeSince(date);       
+        return `${formattedDate} (${ts} ago)`;
 };
 
 window.onload = function() {
