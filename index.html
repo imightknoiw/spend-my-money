@@ -118,14 +118,16 @@
             var buttons = document.getElementsByTagName('button');
             for (var i=0;i<buttons.length;i++){
               buttons[i].innerText = "buy for $"+buttons[i].value;
+	      buttons[i].id = 'item'+(i+1).toString();  
             }
             var items = document.getElementsByClassName('item');
 	    for (var i=0;i<items.length;i++){
 	      var labels = items[i].children[0]; 
-	      labels.innerText = "Item "+(i+1).toString();    
+	      labels.innerText = 'Item '+(i+1).toString();
+	      labels.addAttribute('for', 'item'+(i+1).toString());    
 	    }
 			money.innerText = "$"+CurrentMoney;
-                         $.get('https://api.github.com/repos/imightknoiw/mysite/branches/main', function(github) {
+                         $.get('https://api.github.com/repos/imightknoiw/'+location.pathname.split('/')[1]+'/branches/main', function(github) {
     				lastUpdated.innerText = formatDate(github.commit.commit.author.date);
 			 });
 		}
