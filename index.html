@@ -19,6 +19,9 @@
 	<meta property="twitter:description" content="\"Spend my money\" in this addicting money-spending simulator game! Buy your dream items like Airpod Pros, Lamborghinis, you name it!">
 	<meta property="twitter:image" content="">
         <style>
+		.green {
+		  color: green;	
+		}	
 		.red {
 		  color: red;
 		}
@@ -72,14 +75,17 @@
 	<div class="item">
 		<label>Loading</label><br />
 		<button onclick="sub(this)" value="100">Loading</button>
+		<input type="number" readonly="readonly">
 	</div>
 	<div class="item">
 		<label>Loading</label><br />
 		<button onclick="sub(this)" value="500">Loading</button>
+		<input type="number" readonly="readonly">
 	</div>
 	<div class="item">
 		<label>Loading</label><br />
 		<button onclick="sub(this)" value="1000">Loading</button>
+		<input type="number" readonly="readonly">
 	</div>
 	<footer style="bottom:0;position: relative;">Last updated: <span id="lastUpdated">Loading</span></footer>
 	<script>
@@ -120,7 +126,7 @@ function formatDate(dateString){
 		month: "long",
 		day: "numeric"
 	};
-	var date = new Date(dateString),
+	const date = new Date(dateString),
 	   formattedDate = date.toLocaleDateString(undefined, options),
            ts = timeSince(date);       
         return `${formattedDate} (${ts} ago)`;
@@ -137,8 +143,11 @@ window.onload = function() {
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
 		var labels = items[i].children[0];
+		var inputs = items[i].children[1];
 		labels.innerText = 'Item ' + (i + 1).toString();
 		labels.addAttribute('for', 'item' + (i + 1).toString());
+		inputs.placeholder = "Amount to restore";
+		inputs.max = purchases['item'+(i + 1).toString()];
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
                 lastUpdated.innerText = formatDate(response.commit.commit.author.date);
@@ -151,7 +160,7 @@ window.onbeforeunload = function() {
 };
 
 function sub(e) {
-	var a = e.value;
+	const a = e.value;
 	if (a > CurrentMoney) {
 		money.classList.add('animate__animated', 'animate__shakeX', 'red');
 		setTimeout(function() {
@@ -159,11 +168,12 @@ function sub(e) {
 			money.classList.remove('animate__animated', 'animate__shakeX');
 		}, 2100);
 	} else {
-		var NewAmount = (CurrentMoney - a);
+		const NewAmount = (CurrentMoney - a);
 		CurrentMoney = NewAmount;
-		money.innerText = "$" + CurrentMoney;
-		purchases[e.id] = purchases[e.id] + 1;
+		money.innerText = "$" + NewAmount;
+		purchases[e.id] += 1;
 		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
+		if (purchases[e.id] > 0) e.previousSibling.removeAttribute('readonly'); e.max = purchases[e.id]; else e.previousSibling.addAttribute('readonly', 'readonly'); e.max = purchases[e.id];
 		var subFloat = document.createElement('span');
 		subFloat.style.zIndex = "9999";
 		subFloat.style.right = "0";
@@ -175,6 +185,32 @@ function sub(e) {
 		  subFloat.remove();
 		}, 2000);
 	}
+}
+document.addEventListener('keyup', function(e){
+  if (e.key == "Enter" && document.activeElement.nodeName == "INPUT"){
+    var a = document.activeElement.value;
+	  add({value: a});
+  }
+});	
+		
+function add(e){
+        var a = e.value;
+	var NewAmount = (CurrentMoney + a);
+	CurrentMoney = NewAmount;
+	money.innerText = "$" + CurrentMoney;
+	purchases[e.id] -= 1;
+	e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
+	if (purchases[e.id] > 0) e.previousSibling.removeAttribute('readonly'); e.max = purchases[e.id]; else e.previousSibling.addAttribute('readonly', 'readonly'); e.max = purchases[e.id];
+	var subFloat = document.createElement('span');
+	subFloat.style.zIndex = "9999";
+	subFloat.style.right = "0";
+	subFloat.style.position = "fixed";
+	subFloat.innerText = "+$"+a.toString();
+	subFloat.classList.add('animate__animated', 'animate__fadeOutUp', 'green');
+	money.appendChild(subFloat);
+	setTimeout(function(){
+  		subFloat.remove();
+	}, 2000);
 }
 	</script>
 </body>
