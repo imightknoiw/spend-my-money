@@ -142,12 +142,12 @@ window.onload = function() {
 	}
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
-		var labels = items[i].children[0];
-		var inputs = items[i].children[1];
-		labels.innerText = 'Item ' + (i + 1).toString();
-		labels.addAttribute('for', 'item' + (i + 1).toString());
-		inputs.placeholder = "Amount to restore";
-		inputs.max = Math.floor(purchases['item'+(i + 1).toString()] / 2);
+		var label = items[i].children[0];
+		var input = items[i].children[2];
+		label.innerText = 'Item ' + (i + 1).toString();
+		label.addAttribute('for', 'item' + (i + 1).toString());
+		input.placeholder = "Amount to restore";
+		input.max = Math.floor(purchases['item'+(i + 1).toString()] / 2);
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
                 lastUpdated.innerText = formatDate(response.commit.commit.author.date);
@@ -173,7 +173,11 @@ function sub(e) {
 		money.innerText = "$" + NewAmount;
 		purchases[e.id] += 1;
 		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
-                if (purchases[e.id] > 0){ e.nextSibling.removeAttribute('readonly'); } else { e.nextSibling.addAttribute('readonly', 'readonly'); }
+                if (purchases[e.id] > 0){ 
+			e.nextSibling.removeAttribute('readonly'); 
+		} else { 
+			e.nextSibling.addAttribute('readonly', 'readonly'); 
+		}
 		e.nextSibling.max = Math.floor(purchases[e.id] / 2);
 		var subFloat = document.createElement('span');
 		subFloat.style.zIndex = "9999";
