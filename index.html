@@ -84,12 +84,12 @@
             }
             var items = document.getElementsByClassName('item');
 	    for (var i=0;i<items.length;i++){
-	      var labels = items[i].children[0]; // shitty browser compatability but idgaf ion want boomers playing my shit
+	      var labels = items[i].children[0]; 
 	      labels.innerText = "Item "+(i+1).toString();    
 	    }
 			money.innerText = "$"+CurrentMoney;
-                         $.get('https://api.github.com/repos/imightknoiw/mysite/branches/main', function(responseText) {
-    				lastUpdated.innerText = formatDate(responseText.commit.commit.author.date);
+                         $.get('https://api.github.com/repos/imightknoiw/mysite/branches/main', function(github) {
+    				lastUpdated.innerText = formatDate(github.commit.commit.author.date);
 			 });
 		}
 		window.onbeforeunload = function() {
@@ -103,9 +103,9 @@
   			 money.classList.add('animate__animated', 'animate__shakeX', 'red');		
 			  setTimeout(function(){
 				money.classList.remove('red', 'animate__animated', 'animate__shakeX');
-		          }, 2001); // best year i know 💀     
+		          }, 2100);     
 			}else{
-			  var NewAmount = (parseInt(money.innerText.toString().replace('$', '')) - e.value);
+			  var NewAmount = (CurrentMoney - e.value);
 			  CurrentMoney = NewAmount;	
 			  money.innerText = "$"+CurrentMoney;
 			  e.innerText = buttons[i].innerText = "buy for $"+buttons[i].value;	
