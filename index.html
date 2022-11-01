@@ -177,7 +177,7 @@ function sub(e) {
 		const NewAmount = (CurrentMoney - a);
 		CurrentMoney = NewAmount;
 		money.innerText = "$" + NewAmount;
-		purchases[e.id] += 1;
+		purchases[e.id] = purchases[e.id] + 1;
 		e.innerText = "buy for $" + a + " ("+purchases[e.id]+"x)";
                 if (purchases[e.id] > 0){ 
 			e.nextSibling.removeAttribute('readonly'); 
@@ -208,7 +208,7 @@ function add(e){
 	var NewAmount = (CurrentMoney + a);
 	CurrentMoney = NewAmount;
 	money.innerText = "$" + CurrentMoney;
-	purchases[e.previousSibling.id] -= 1;
+	purchases[e.previousSibling.id] = purchases[e.previousSibling.id] - 1;
 	e.previousSibling.innerText = "buy for $" + a + " ("+purchases[e.previousSibling.id]+"x)";
         if (purchases[e.previousSibling.id] > 0){ e.removeAttribute('readonly'); } else {e.previousSibling.addAttribute('readonly', 'readonly');}
 	e.max = Math.floor(purchases[e.id] / 2);
