@@ -126,14 +126,15 @@ const formatDate = (dateString) => {
 	   formattedDate = date.toLocaleDateString(undefined, options),
            ts = timeSince(date);   
     
-return `${formattedDate} (${ts} ago)`
+return `${formattedDate} (${ts} ago)`;
 };
 
 window.onload = function() {
+	money.innerText = "$" + CurrentMoney;
 	var buttons = document.getElementsByTagName('button');
 	for (var i = 0; i < buttons.length; i++) {
 		buttons[i].id = 'item' + (i + 1).toString();
-    		purchases["item"+(i + 1).toString()] = 0;
+    		purchases['item'+(i + 1).toString()] = 0;
    		buttons[i].innerText = "buy for $" + buttons[i].value + " ("+purchases[buttons[i].id]+"x)";
 	}
 	var items = document.getElementsByClassName('item');
@@ -142,7 +143,6 @@ window.onload = function() {
 		labels.innerText = 'Item ' + (i + 1).toString();
 		labels.addAttribute('for', 'item' + (i + 1).toString());
 	}
-	money.innerText = "$" + CurrentMoney;
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
                 lastUpdated.innerText = formatDate(response.commit.commit.author.date);
 	});
@@ -157,12 +157,14 @@ function sub(e) {
 	if (e.value > CurrentMoney) {
 		money.classList.add('animate__animated', 'animate__shakeX', 'red');
 		setTimeout(function() {
-			money.classList.remove('red', 'animate__animated', 'animate__shakeX');
+			money.classList.remove('red');
+			money.classList.remove('animate__animated', 'animate__shakeX');
 		}, 2100);
 	} else {
 		var NewAmount = (CurrentMoney - e.value);
 		CurrentMoney = NewAmount;
 		money.innerText = "$" + CurrentMoney;
+		purchases[e.id] = purchases[e.id] + 1;
 		e.innerText = "buy for $" + e.value + " ("+purchases[e.id]+"x)";
 	}
 }
