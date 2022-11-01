@@ -135,21 +135,22 @@ function formatDate(dateString){
 window.onload = function() {
 	money.innerText = "$" + CurrentMoney;
 	var items = document.getElementsByClassName('item');
+	var buttons = docuent.getElementsByTagName('button');
 	for (var i = 0; i < items.length; i++) {
 		var label = items[i].children[0],
-		    button = items[i].children[1],
 		    input = items[i].children[2],
 		    itemName = 'item' + (i + 1).toString());
 		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
 		
-		button.id = itemName;
-    		purchases[itemName] = 0;
-   		button.innerText = "buy for $" + button.value + " ("+purchases[itemName]+"x)";
-		
 		input.placeholder = "Amount to restore";
 		input.max = Math.floor(purchases[itemName]) / 2;
+	}
+	for (var i = 0; i < buttons.length; i++){
+	  buttons[i].id = itemName;
+    	  purchases[itemName] = 0;
+   	  buttons[i].innerText = "buy for $" + buttons[i].value + " ("+purchases[itemName]+"x)";
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
                 lastUpdated.innerText = formatDate(response.commit.commit.author.date);
