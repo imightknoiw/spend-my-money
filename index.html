@@ -115,14 +115,17 @@ function timeSince(date) {
 	}
 	return Math.floor(seconds) + " seconds";
 }
+const formatDate = (dateString) => {
 	const options = {
 		year: "numeric",
 		month: "long",
 		day: "numeric"
 	};
-	var date = new Date(dateString),
-		formattedDate = date.toLocaleDateString(undefined, options);
-	return formattedDate+" ("+timeSince(date)+" ago)";
+	var date = new Date(dateString);
+	var formattedDate = date.toLocaleDateString(undefined, options);
+  var ts = timeSince(date);   
+    
+return {fd: formattedDate, ts: ts};
 };
 
 window.onload = function() {
@@ -140,7 +143,8 @@ window.onload = function() {
 	}
 	money.innerText = "$" + CurrentMoney;
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
-		lastUpdated.innerText = formatDate(response.commit.commit.author.date);
+		var updateDate = response.commit.commit.author.date;
+    lastUpdated.innerText = formatDate(updateDate).fd+" ("+formatDate(updateDate).ts+" ago)";
 	});
 };
 window.onbeforeunload = function() {
