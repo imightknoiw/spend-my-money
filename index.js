@@ -67,6 +67,13 @@ function formatDate(dateString) {
 		input.placeholder = "Amount to restore";
 		input.disabled = true;
 		input.max = (Math.floor(purchases[itemName]) / 2);
+		input.addEventListener('keyup', function(e) {
+			if (e.keyCode === 13 && document.activeElement.nodeName === "INPUT") {
+				if (!document.activeElement.disabled && document.activeElement.value.length > 0){
+					add(document.activeElement);
+				} 
+			}
+		});
 	}
 	
 
@@ -110,14 +117,6 @@ function sub(e) {
 		}, 2000);
 	}
 }
-
-document.addEventListener('keyup', function(e) {
-	if (e.keyCode === 13 && document.activeElement.nodeName === "INPUT") {
-		if (!document.activeElement.disabled && document.activeElement.value.length > 0){
-			add(document.activeElement);
-		} 
-	}
-});
 
 function add(e) {
 	var a = e.previousSibling.value,
