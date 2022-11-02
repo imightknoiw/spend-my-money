@@ -47,10 +47,10 @@ window.onload = function() {
 	
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
-		var label = items[i].getElementsByTagName('label')[0],
-			button = items[i].getElementsByTagName('button')[0],
-			input = items[i].getElementsByTagName('input')[0],
-			itemName = 'item' + (i + 1).toString();
+		var label = items[i].children[0],
+		    button = items[i].children[2],
+		    input = items[i].children[3],
+		    itemName = ('item' + (i + 1).toString());
 		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
@@ -60,7 +60,7 @@ window.onload = function() {
 		button.innerText = "buy for $" + button.value + " (" + purchases[itemName] + "x)";
 		
 		input.placeholder = "Amount to restore";
-		input.max = Math.floor(purchases[itemName]) / 2;
+		input.max = (Math.floor(purchases[itemName]) / 2);
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
 		lastUpdated.innerText = formatDate(response.commit.commit.author.date);
