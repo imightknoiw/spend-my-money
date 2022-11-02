@@ -48,10 +48,12 @@ function formatDate(dateString) {
 
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
-		alert(items[i].children[0].tagName);
 		var label = items[i].children[0];
+		alert(label.tagName);
 		var button = items[i].children[2];
+		alert(button.tagName);
 		var input = items[i].children[3];
+		alert(input.tagName);
 		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
