@@ -85,10 +85,10 @@ function sub(e) {
 		purchases[e.id] = purchases[e.id] + 1;
 		e.innerText = "buy for $" + a + " (" + purchases[e.id] + "x)";
 		if (purchases[e.id] > 0) {
-			e.nextSibling.removeAttribute('readonly');
+			e.nextSibling.disabled = false;
 		} else {
-			e.nextSibling.addAttribute('readonly', 'readonly');
-		}
+			e.nextSibling.disabled = true;
+		} 
 		e.nextSibling.max = Math.floor(purchases[e.id] / 2);
 		var subFloat = document.createElement('span');
 		subFloat.style.zIndex = "9999";
