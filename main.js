@@ -54,16 +54,17 @@ function formatDate(dateString) {
 		alert(button.tagName + i.toString());
 		var input = items[i].children[3];
 		alert(input.tagName + i.toString());
+		var itemName = 'item' + (i + 1).toString();
 		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
 		
-		button.id = 'item' + (i + 1).toString();
-		purchases['item' + (i + 1).toString()] = 0;
-		button.innerText = "buy for $" + button.value + " (" + purchases['item' + (i + 1).toString()] + "x)";
+		button.id = itemName;
+		purchases[itemName] = 0;
+		button.innerText = "buy for $" + button.value + " (" + purchases[itemName] + "x)";
 		
 		input.placeholder = "Amount to restore";
-		input.max = (Math.floor(purchases['item' + (i + 1).toString()]) / 2);
+		input.max = (Math.floor(purchases[itemName]) / 2);
 	}
 	
 
