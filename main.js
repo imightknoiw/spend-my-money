@@ -1,9 +1,10 @@
 const StarterMoney = 1669;
-var CurrentMoney = StarterMoney;
-var money = document.getElementById('money');
+var CurrentMoney = StarterMoney,
+    money = document.getElementById('money'),
+    purchases = {};
 money.innerText = "$" + CurrentMoney;
 
-var purchases = {};
+
 
 function timeSince(date) {
 	
@@ -52,17 +53,15 @@ window.onload = function() {
 		    button = items[i].children[2],
 		    input = items[i].children[3];
 		
-		const itemName = ('item' + (i + 1).toString());
-		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
 		
-		button.id = itemName;
-		purchases[itemName] = 0;
-		button.innerText = "buy for $" + button.value + " (" + purchases[itemName] + "x)";
+		button.id = 'item' + (i + 1).toString();
+		purchases['item' + (i + 1).toString()] = 0;
+		button.innerText = "buy for $" + button.value + " (" + purchases['item' + (i + 1).toString()] + "x)";
 		
 		input.placeholder = "Amount to restore";
-		input.max = (Math.floor(purchases[itemName]) / 2);
+		input.max = (Math.floor(purchases['item' + (i + 1).toString()]) / 2);
 	}
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
 		document.getElementById('lastUpdated').innerText = formatDate(response.commit.commit.author.date);
