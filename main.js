@@ -3,7 +3,7 @@ var CurrentMoney = StarterMoney;
 var money = document.getElementById('money');
 money.innerText = "$" + CurrentMoney;
 
-let purchases = {};
+var purchases = {};
 
 function timeSince(date) {
 	
