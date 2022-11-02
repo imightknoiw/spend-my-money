@@ -89,7 +89,6 @@ function sub(e) {
 			alert("yes");
 			e.nextSibling.disabled = false;
 		} else {
-			alert("no");
 			e.nextSibling.disabled = true;
 		} 
 		e.nextSibling.max = Math.floor(purchases[e.id] / 2);
