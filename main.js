@@ -107,7 +107,7 @@ document.addEventListener('keyup', function(e) {
 	if (e.key == "Enter" && document.activeElement.nodeName == "INPUT") {
 		if (!document.activeElement.disabled && document.activeElement.value.length > 0){
 			add(document.activeElement);
-		}
+		} 
 	}
 });
 
