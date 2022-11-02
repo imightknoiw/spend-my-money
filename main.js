@@ -42,13 +42,16 @@ function formatDate(dateString) {
 		ts = timeSince(date);
 	return `${formattedDate} (${ts} ago)`;
 }
-	
+	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
+		document.getElementById('lastUpdated').innerText = formatDate(response.commit.commit.author.date);
+	});
+
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
 		alert(items[i].children[0].tagName);
-		var label = items[i].children[0],
-		    button = items[i].children[2],
-		    input = items[i].children[3];
+		var label = items[i].children[0];
+		var button = items[i].children[2];
+		var input = items[i].children[3];
 		
 		label.innerText = 'Item ' + (i + 1).toString();
 		label.addAttribute('for', itemName);
@@ -60,9 +63,7 @@ function formatDate(dateString) {
 		input.placeholder = "Amount to restore";
 		input.max = (Math.floor(purchases['item' + (i + 1).toString()]) / 2);
 	}
-	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
-		document.getElementById('lastUpdated').innerText = formatDate(response.commit.commit.author.date);
-	});
+	
 
 window.onbeforeunload = function() {
 	if (StarterMoney > CurrentMoney) {
