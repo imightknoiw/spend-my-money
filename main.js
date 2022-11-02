@@ -85,8 +85,10 @@ function sub(e) {
 		purchases[e.id] = purchases[e.id] + 1;
 		e.innerText = "buy for $" + a + " (" + purchases[e.id] + "x)";
 		if (purchases[e.id] > 0) {
+			alert("yes");
 			e.nextSibling.disabled = false;
 		} else {
+			alert("no");
 			e.nextSibling.disabled = true;
 		} 
 		e.nextSibling.max = Math.floor(purchases[e.id] / 2);
