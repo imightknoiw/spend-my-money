@@ -122,9 +122,11 @@ function add(e) {
 	purchases[e.previousSibling.id] = Math.floor(purchases[e.previousSibling.id]) - 1;
 	e.previousSibling.innerText = "buy for $" + a + " (" + purchases[e.previousSibling.id] + "x)";
 	if (Math.floor(purchases[e.previousSibling.id]) > 0) {
-		e.removeAttribute('readonly');
+		e.disabled = false;
+		alert("disabled: false");
 	} else {
-		e.previousSibling.addAttribute('readonly', 'readonly');
+		e.disabled = true;
+		alert("disabled: true");
 	}
 	e.max = Math.floor(purchases[e.id]) / 2;
 	e.value = '';
