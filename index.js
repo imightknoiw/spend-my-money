@@ -98,13 +98,13 @@ function sub(e) {
 		purchases[e.id] = purchases[e.id] + 1;
 		e.innerText = "buy for $" + a + " (" + purchases[e.id] + "x)";
 		if (Math.floor(purchases[e.id]) > 0) {
-			e.nextSibling.disabled = false;
-			alert("enabled elem:"+e.nextSibling.tagName);
+			e.nextElementSibling.disabled = false;
+			alert("enabled elem:"+e.nextElementSibling.tagName);
 		} else {
-			e.nextSibling.disabled = true;
-			alert("disabled elem:"+e.nextSibling.tagName);
+			e.nextElementSibling.disabled = true;
+			alert("disabled elem:"+e.nextElementSibling.tagName);
 		}
-		e.nextSibling.max = Math.floor(purchases[e.id]) / 2;
+		e.nextElementSibling.max = Math.floor(purchases[e.id]) / 2;
 		var subFloat = document.createElement('span');
 		subFloat.style.zIndex = "9999";
 		subFloat.style.right = "0";
