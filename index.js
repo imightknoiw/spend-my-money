@@ -58,6 +58,11 @@ function formatDate(dateString) {
 		button.id = itemName;
 		purchases[itemName] = 0;
 		button.innerText = "buy for $" + button.value + " (" + purchases[itemName] + "x)";
+		button.addEventListener('keyup', function(){
+			if (e.keyCode === 13){
+				e.preventDefault();	
+			}	
+		});
 		
 		input.placeholder = "Amount to restore";
 		input.disabled = true;
@@ -107,7 +112,7 @@ function sub(e) {
 }
 
 document.addEventListener('keyup', function(e) {
-	if (e.key == "Enter" && document.activeElement.nodeName == "INPUT") {
+	if (e.keyCode === 13 && document.activeElement.nodeName === "INPUT") {
 		if (!document.activeElement.disabled && document.activeElement.value.length > 0){
 			add(document.activeElement);
 		} 
