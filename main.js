@@ -47,7 +47,7 @@ window.onload = function() {
 	
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
-		
+		alert(items[i].children[2].nodeName);
 		var label = items[i].children[0],
 		    button = items[i].children[2],
 		    input = items[i].children[3];
