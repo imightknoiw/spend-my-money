@@ -57,7 +57,6 @@ function formatDate(dateString) {
 		var itemName = 'item' + (i + 1).toString();
 		
 		label.innerText = 'Item ' + (i + 1).toString();
-		label.addAttribute('for', itemName);
 		
 		button.id = itemName;
 		purchases[itemName] = 0;
