@@ -49,11 +49,8 @@ function formatDate(dateString) {
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
 		var label = items[i].children[0];
-		alert(label.tagName + i.toString());
 		var button = items[i].children[2];
-		alert(button.tagName + i.toString());
 		var input = items[i].children[3];
-		alert(input.tagName + i.toString());
 		var itemName = 'item' + (i + 1).toString();
 		
 		label.innerText = 'Item ' + (i + 1).toString();
