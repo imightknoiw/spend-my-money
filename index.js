@@ -99,10 +99,10 @@ function sub(e) {
 		e.innerText = "buy for $" + a + " (" + purchases[e.id] + "x)";
 		if (Math.floor(purchases[e.id]) > 0) {
 			e.nextSibling.disabled = false;
-			alert("disabled: false");
+			alert("enabled elem:"+e.nextSibling.tagName);
 		} else {
 			e.nextSibling.disabled = true;
-			alert("disabled: true");
+			alert("disabled elem:"+e.nextSibling.tagName);
 		}
 		e.nextSibling.max = Math.floor(purchases[e.id]) / 2;
 		var subFloat = document.createElement('span');
@@ -127,10 +127,10 @@ function add(e) {
 	e.previousSibling.innerText = "buy for $" + a + " (" + purchases[e.previousSibling.id] + "x)";
 	if (Math.floor(purchases[e.previousSibling.id]) > 0) {
 		e.disabled = false;
-		alert("disabled: false");
+		alert("enabled elem:"+e.tagName);
 	} else {
 		e.disabled = true;
-		alert("disabled: true");
+		alert("disabled elem:"+e.tagName);
 	}
 	e.max = Math.floor(purchases[e.id]) / 2;
 	e.value = '';
