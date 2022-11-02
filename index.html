@@ -58,6 +58,8 @@
 		
 		footer {
 		  margin-top: auto;
+		  bottom:0;
+		  position: relative;
 		}
 		
 		.item {
@@ -69,28 +71,35 @@
 		  border: 1px solid black;
 		  border-radius: 10%;
 		}
+		#money {
+		  position: fixed;
+		  right: 0;	
+		}
+		hr {
+		  position: fixed;
+		}
 	</style>	
 </head>
 
 <body>
-	<h1>💰 Spend my money!<span id="money" style="position: fixed;right: 0;">Loading</span></h1>
-	<hr style="position:fixed;" />
+	<h1>💰 Spend my money!<span id="money">Loading</span></h1>
+	<hr />
 	<div class="item">
 		<label>Loading</label><br />
 		<button onclick="sub(this)" value="100">Loading</button>
-		<input type="number" readonly="readonly">
+		<input type="number" disabled>
 	</div>
 	<div class="item">
 		<label>Loading</label><br />
 		<button onclick="sub(this)" value="500">Loading</button>
-		<input type="number" readonly="readonly">
+		<input type="number" disabled>
 	</div>
 	<div class="item">
 		<label>Loading</label><br />
 		<button onclick="sub(this)" value="1000">Loading</button>
-		<input type="number" readonly="readonly">
+		<input type="number" disabled>
 	</div>
-	<footer style="bottom:0;position: relative;">Last updated: <span id="lastUpdated">Loading</span></footer>
+	<footer>Last updated: <span id="lastUpdated">Loading</span></footer>
 	<script src="main.js"></script>
 </body>
 
