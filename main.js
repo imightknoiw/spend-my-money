@@ -3,7 +3,7 @@ var CurrentMoney = StarterMoney;
 var money = document.getElementById('money');
 var purchases = {};
 
-money.innerText = "$" + CurrentMoney;
+money.innerText = "$" + CurrentMoney.toString();
 
 function timeSince(date) {
 	
@@ -42,8 +42,8 @@ function formatDate(dateString) {
 		ts = timeSince(date);
 	return `${formattedDate} (${ts} ago)`;
 }
-	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
-		document.getElementById('lastUpdated').innerText = formatDate(response.commit.commit.author.date);
+	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(repository) {
+		document.getElementById('lastUpdated').innerText = formatDate(repository.commit.commit.author.date);
 	});
 
 	var items = document.getElementsByClassName('item');
@@ -60,6 +60,7 @@ function formatDate(dateString) {
 		button.innerText = "buy for $" + button.value + " (" + purchases[itemName] + "x)";
 		
 		input.placeholder = "Amount to restore";
+		input.disabled = true;
 		input.max = (Math.floor(purchases[itemName]) / 2);
 	}
 	
