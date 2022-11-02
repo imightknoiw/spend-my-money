@@ -58,7 +58,7 @@ function formatDate(dateString) {
 		button.id = itemName;
 		purchases[itemName] = 0;
 		button.innerText = "buy for $" + button.value + " (" + purchases[itemName] + "x)";
-		button.addEventListener('keyup', function(){
+		button.addEventListener('keyup', function(e){
 			if (e.keyCode === 13){
 				e.preventDefault();	
 			}	
