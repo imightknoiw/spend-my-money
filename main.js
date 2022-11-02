@@ -1,10 +1,9 @@
 const StarterMoney = 1669;
-var CurrentMoney = StarterMoney,
-    money = document.getElementById('money'),
-    purchases = {};
+var CurrentMoney = StarterMoney;
+var money = document.getElementById('money');
+var purchases = {};
+
 money.innerText = "$" + CurrentMoney;
-
-
 
 function timeSince(date) {
 	
@@ -43,12 +42,10 @@ function formatDate(dateString) {
 		ts = timeSince(date);
 	return `${formattedDate} (${ts} ago)`;
 }
-
-window.onload = function() {
 	
 	var items = document.getElementsByClassName('item');
 	for (var i = 0; i < items.length; i++) {
-		alert(items[i].children[1].nodeName);
+		alert(items[i].children[3].nodeName);
 		var label = items[i].children[0],
 		    button = items[i].children[2],
 		    input = items[i].children[3];
@@ -66,7 +63,6 @@ window.onload = function() {
 	$.get('https://api.github.com/repos/imightknoiw/spend-my-money/branches/main', function(response) {
 		document.getElementById('lastUpdated').innerText = formatDate(response.commit.commit.author.date);
 	});
-};
 
 window.onbeforeunload = function() {
 	if (StarterMoney > CurrentMoney) {
